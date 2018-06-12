@@ -1,11 +1,12 @@
-package com.example.arnau.loggindemo;
+package com.example.arnau.loggindemo.Juego;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
+
+import com.example.arnau.loggindemo.R;
 
 public class SplashScreenActivity extends AppCompatActivity {
 

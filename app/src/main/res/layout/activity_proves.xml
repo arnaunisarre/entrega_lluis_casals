@@ -4,19 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Juego.SplashScreenActivity">
+    tools:context=".Proves">
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="169dp"
-        android:layout_height="148dp"
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        android:elevation="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.266"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/worldofeetac" />
+        app:layout_constraintVertical_bias="0.119"
+        app:srcCompat="@drawable/flecha_gris_derecha" />
+
 </android.support.constraint.ConstraintLayout>
