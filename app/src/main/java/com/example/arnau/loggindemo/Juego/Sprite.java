@@ -1,8 +1,13 @@
 package com.example.arnau.loggindemo.Juego;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
+import android.util.Log;
+
+import com.example.arnau.loggindemo.Clases.Escenario;
+import com.example.arnau.loggindemo.Proves;
 
 import java.util.Random;
 
@@ -12,15 +17,19 @@ public class Sprite {
     int[] DIRECTION_TO_ANIMATION_MAP = { 3, 1, 0, 2 };
     private static final int BMP_ROWS = 4;
     private static final int BMP_COLUMNS = 3;
-    private int x = 0;
-    private int y = 0;
-    private int xSpeed = 5;
+    private int x = 90;
+    private int y = 90;
+
     private GameView gameView;
     private Bitmap bmp;
     private int currentFrame = 0;
     private int width;
     private int height;
-    private int ySpeed;
+    private  int direction = 1;
+    private int posx = 1;
+    private int posy =1;
+    private int speed;
+    private final int defSpeed = 15;
 
 
     public Sprite(GameView gameView, Bitmap bmp) {
@@ -29,37 +38,151 @@ public class Sprite {
         this.gameView = gameView;
         this.bmp = bmp;
 
-        Random rnd = new Random(System.currentTimeMillis());
-        xSpeed = rnd.nextInt(50) - 5;
-        ySpeed = rnd.nextInt(50) - 5;
+//        Random rnd = new Random(System.currentTimeMillis());
+//        xSpeed = rnd.nextInt(50) - 5;
+//        ySpeed = rnd.nextInt(50) - 5;
     }
 
     private void update() {
-        if (x >= gameView.getWidth() - width - xSpeed || x + xSpeed <= 0) {
-            xSpeed = -xSpeed;
-        }
-        x = x + xSpeed;
-        if (y >= gameView.getHeight() - height - ySpeed || y + ySpeed <= 0) {
-            ySpeed = -ySpeed;
-        }
-        y = y + ySpeed;
-        currentFrame = ++currentFrame % BMP_COLUMNS;
-    }
 
-    public void dibujar(Canvas canvas) {
+        if(speed!=0) {
+            currentFrame = ++currentFrame % BMP_COLUMNS;
+        }
+
+        switch (direction) {
+
+            case 0:     //up
+                if (y>posy*90) {
+                    y -= 15;
+
+
+
+                }
+                else
+                    stop();
+                break;
+            case 1:     //left
+                if (x>posx*90) {
+
+                    x -= 15;
+                }
+                else
+                    stop();
+                break;
+            case 2:     //down
+
+                if (y<(posy*90)) {
+                    y += 15;
+
+                }
+                else
+                    stop();
+                break;
+            case 3:     //right
+                if (x<posx*90) {
+
+                    x += 15;
+
+                }
+                else
+                    stop();
+                break;
+            case 4:
+                break;
+
+        }
+    }
+    public void dibujar(Canvas canvas, Escenario esc) {
         update();
         int srcX = currentFrame * width;
-        int srcY = getAnimationRow() * height;
+        int srcY = DIRECTION_TO_ANIMATION_MAP[direction] * height;
         Rect src = new Rect(srcX, srcY, srcX + width, srcY + height);
         Rect dst = new Rect(x, y, x + width, y + height);
         canvas.drawBitmap(bmp, src, dst, null);
     }
 
+    public void setDirection(int direction, Escenario esc){
+        this.direction = direction;
+        boolean valido ;
+        speed = defSpeed;
+        switch (direction) {
+            case 0://up
+
+                valido = esc.celdas[posx][(posy-1)].getPuedopasar();
+               if (valido==true )
+                posy =  posy-1;
+               else {
+
+                   if (esc.celdas[posx][(posy - 1)].getTipo().equals("malo1")) {
+                       int o = 1;
+                       gameView.startActProva(esc.celdas[posx][(posy - 1)].getTipo());
+                   }
+                   speed = 0;
+               }
+
+                break;
+            case 1:     //left
+                valido = esc.celdas[posx-1][(posy)].getPuedopasar();
+
+                if (valido ==true )
+                posx = posx-1;
+                else{
+                    if (esc.celdas[posx-1][(posy)].getTipo().equals("malo1")) {
+                        int o = 1;
+                        gameView.startActProva((esc.celdas[posx - 1][(posy)].getTipo()));
+                }
+                    speed = 0;
+
+                }
+
+                break;
+            case 2:     //down
+                int q = posy+1;
+                valido = esc.celdas[posx][(posy+1)].getPuedopasar();
+                if (valido==true )
+                posy = posy+1;
+                else {
+
+                    if (esc.celdas[posx][(posy + 1)].getTipo().equals("malo1")) {
+                        int o = 1;
+                        gameView.startActProva(esc.celdas[posx][(posy + 1)].getTipo());
+                    }
+                    speed = 0;
+                }
+
+                break;
+
+            case 3:     //right
+                valido = esc.celdas[posx+1][(posy)].getPuedopasar();
+                if (valido==true ){
+
+                    posx = posx+1;
+                }
+
+                else{
+                    if (esc.celdas[posx+1][(posy)].getTipo().equals("malo1")){
+                        int o =1;
+                        gameView.startActProva(esc.celdas[posx+1][(posy)].getTipo());
+                    }
+                    speed = 0;
+                }
+
+
+
+                break;
+            case 4:
+                break;
+
+        }
+
+    }
     // direction = 0 up, 1 left, 2 down, 3 right,
     // animation = 3 back, 1 left, 0 front, 2 right
     private int getAnimationRow() {
-        double dirDouble = (Math.atan2(xSpeed, ySpeed) / (Math.PI / 2) + 2);
-        int direction = (int) Math.round(dirDouble) % BMP_ROWS;
         return DIRECTION_TO_ANIMATION_MAP[direction];
+    }
+
+    public void stop(){
+        speed =0 ;
     }
 }

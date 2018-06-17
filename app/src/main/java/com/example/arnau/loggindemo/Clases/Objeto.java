@@ -1,6 +1,8 @@
 package com.example.arnau.loggindemo.Clases;
 
-public class Objeto{
+import java.io.Serializable;
+
+public class Objeto implements Serializable {
 
 
 

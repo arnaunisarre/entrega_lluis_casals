@@ -11,6 +11,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.example.arnau.loggindemo.Clases.Usuario;
+import com.example.arnau.loggindemo.Proves;
 import com.example.arnau.loggindemo.R;
 
 public class Pintarescenario extends AppCompatActivity {
@@ -21,6 +23,9 @@ public class Pintarescenario extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        GameView newGameView= new GameView(this);
+        Intent i = this.getIntent();
+        newGameView.setJugador((Usuario)i.getExtras().getSerializable("usuario"));
 
         // Set fullscreen
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -29,10 +34,9 @@ public class Pintarescenario extends AppCompatActivity {
         // Set No Title
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-        getSupportActionBar().hide();
 
 
-        setContentView(new GameView(this));
+        setContentView(newGameView);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
 
@@ -40,4 +44,5 @@ public class Pintarescenario extends AppCompatActivity {
 
 
     }
+
 }

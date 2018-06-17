@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".Juego.MainActivity" />
         <activity android:name=".Juego.SecondActivity" />
         <activity android:name=".Actllista" />
@@ -26,8 +27,8 @@
         </activity>
         android:screenOrientation="landscape"
         <activity android:name=".Juego.Pintarescenario"></activity>
-
         <activity android:name=".Proves"></activity>
+        <activity android:name=".Juego.Preguntas"></activity>
     </application>
 
 </manifest>

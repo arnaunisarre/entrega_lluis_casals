@@ -4,9 +4,10 @@ import com.example.arnau.loggindemo.Clases.Objeto;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public class Usuario {
+public class Usuario implements Serializable {
     @SerializedName("nombre")
     @Expose
     private String nombre;
@@ -42,11 +43,12 @@ public class Usuario {
     public String getNombre(){
         return nombre;
     }
+
     public Objeto getObjeto(String nombreob) {
         int i = 0;
         boolean a = false;
         Objeto e = new Objeto();
-        while (i <= miInventario.size() && a == false) {
+        while (i < miInventario.size() && !a) {
 
             e = miInventario.get(i);
             if (nombreob.equals(e.getNombreObjeto())) {
