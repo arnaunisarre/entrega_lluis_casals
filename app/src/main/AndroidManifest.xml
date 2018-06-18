@@ -14,7 +14,6 @@
 
         <activity android:name=".Juego.MainActivity" />
         <activity android:name=".Juego.SecondActivity" />
-        <activity android:name=".Actllista" />
         <activity android:name=".Juego.llistaActivity" />
         <activity android:name=".Juego.MostrarObjeto" />
 
@@ -26,9 +25,6 @@
             </intent-filter>
         </activity>
         android:screenOrientation="landscape"
-        <activity android:name=".Juego.Pintarescenario"></activity>
-        <activity android:name=".Proves"></activity>
-        <activity android:name=".Juego.Preguntas"></activity>
     </application>
 
 </manifest>

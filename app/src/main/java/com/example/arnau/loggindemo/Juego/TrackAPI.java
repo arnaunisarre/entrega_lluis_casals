@@ -2,7 +2,6 @@ package com.example.arnau.loggindemo.Juego;
 
 
 
-import com.example.arnau.loggindemo.Clases.Login;
 import com.example.arnau.loggindemo.Clases.Objeto;
 
 import java.util.List;
@@ -17,14 +16,12 @@ public interface TrackAPI {
 
 
 
-    @POST("json/inicio")
-    Call<Boolean> login(@Body Login login);
 
     @GET("json/listaObjetosUsuario/{nombreusuario}")
     Call <List<Objeto>> getlistaObjetosUser (@Path("nombreusuario") String nombreus);
 
-    @GET ("json//obj/{user}/{obj}")
-    Call<Objeto> getObjeto(@Path("user") String usuario, @Path("obj") String nombreObjeto);
+    @GET ("json/{obj}")
+    Call<Objeto> getObjeto(@Path("obj") String nombreObjeto);
 
 
 }

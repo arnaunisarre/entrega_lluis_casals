@@ -33,12 +33,11 @@ public class MostrarObjeto extends AppCompatActivity {
         setContentView(R.layout.activity_mostrarobjeto);
 
         Intent i = this.getIntent();
-        nombreUsuario = i.getStringExtra("id");
-        nombreObjeto = i.getStringExtra("id");
+        nombreObjeto = i.getStringExtra("objeto");
 
 
 
-        API.getInstance().api.getObjeto(nombreUsuario,nombreObjeto).enqueue(new Callback<Objeto>() {
+        API.getInstance().api.getObjeto(nombreObjeto).enqueue(new Callback<Objeto>() {
             @Override
             public void onResponse(Call<Objeto> call, Response<Objeto> response) {
 
@@ -53,8 +52,11 @@ public class MostrarObjeto extends AppCompatActivity {
                     description = (TextView)findViewById(R.id.description_text);
                     description.setText(u.getDescripcion());
                     id = (TextView)findViewById(R.id.id_text);
-                    id.setText(u.getIdObjeto());
-                    //Picasso.with(getApplicationContext()).load(u.getUrlObjeto()).into((ImageView) findViewById(R.id.image));
+
+                    id.setText(""+u.getIdObjeto());
+                    String url = u.getUrlObjeto();
+
+                    Picasso.with(getApplicationContext()).load(url).into((ImageView) findViewById(R.id.image));
                 }
             }
 
