@@ -26,7 +26,7 @@ public class ObjetoArrayAdapter extends ArrayAdapter<Objeto> {
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.objeto_layout, parent, false);
         }
-        Picasso.with(super.getContext()).load("res/drawable/agua.png").into((ImageView) convertView.findViewById(R.id.avatar_image));
+        Picasso.with(super.getContext()).load(u.getUrlObjeto()).into((ImageView) convertView.findViewById(R.id.avatar_image));
         TextView et = (TextView)convertView.findViewById(R.id.username_txt);
         et.setText(u.getNombreObjeto());
         return convertView;
